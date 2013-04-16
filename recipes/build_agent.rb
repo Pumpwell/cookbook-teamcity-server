@@ -1,14 +1,6 @@
 include_recipe "teamcity_server::common"
 
 unless node["teamcity_server"]["build_agent"]["server"]
-  server_node = search(:node, "recipes:teamcity_server\\:\\:server").first
-
-  if server_node
-    node.default["teamcity_server"]["build_agent"]["server"] = server_node["ipaddress"]
-  end
-end
-
-unless node["teamcity_server"]["build_agent"]["server"]
   Chef::Application.fatal! "Undefined TeamCity server address"
 end
 
